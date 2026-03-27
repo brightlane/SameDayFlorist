@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Delivery Near Me - Same Day Flowers Online | FloristOne</title>
+    <meta name="description" content="Order flowers online for same day flower delivery near me. Send flowers for birthdays, Mother's Day, weddings & more with reliable florist delivery. Fast, fresh flowers!">
+    <link rel="canonical" href="https://yourdomain.com/index.html">
+    <link rel="alternate" hreflang="en" href="https://yourdomain.com/index.html">
+    <link rel="alternate" hreflang="fr" href="https://yourdomain.com/index.html#fr">
+    <link rel="alternate" hreflang="es" href="https://yourdomain.com/index.html#es">
+    <style>
+        /* Critical CSS for above-the-fold */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background: #f9f9f9; }
+        header { background: #228B22; color: white; padding: 1rem; position: sticky; top: 0; z-index: 100; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .lang-toggle { display: flex; gap: 0.5rem; }
+        .lang-toggle button { background: none; border: none; color: white; cursor: pointer; padding: 0.5rem; }
+        .lang-active { font-weight: bold; text-decoration: underline; }
+        .hero { background: #90EE90; padding: 2rem; text-align: center; }
+        .cta { background: #FF4500; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; font-size: 1.2rem; display: inline-block; margin: 1rem 0; }
+        section { padding: 2rem; max-width: 1200px; margin: auto; }
+        h1, h2, h3 { color: #228B22; }
+        .tl-dr { background: #e8f5e8; padding: 1rem; margin: 1rem 0; border-left: 4px solid #228B22; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { border: 1px solid #ddd; padding: 0.8rem; text-align: left; }
+        th { background: #228B22; color: white; }
+        .lang-section { margin: 2rem 0; padding: 1.5rem; background: #f0f8f0; border-radius: 8px; }
+        .faq { margin: 1rem 0; }
+        .faq details { margin-bottom: 1rem; }
+        .testimonial { background: white; padding: 1rem; margin: 1rem 0; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        #exit-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; }
+        #exit-popup div { background: white; margin: 20% auto; padding: 2rem; max-width: 400px; text-align: center; }
+        @media (max-width: 768px) { .hero { padding: 1rem; } section { padding: 1rem; } }
+        /* Lazy load images */
+        img { loading: lazy; }
+    </style>
+    <link rel="preload" href="data:font/woff2;base64,..." as="font" type="font/woff2" crossorigin> <!-- Placeholder for font -->
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiRmxvd2VyIERlbGl2ZXJ5Iiwic2hvcnRfbmFtZSI6IkZsb3dlcnMifQ==">
+    <!-- GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Flower Delivery Experts</h1>
+            <div class="lang-toggle">
+                <button onclick="switchLang('en')" class="lang-active">EN</button>
+                <button onclick="switchLang('fr')">FR</button>
+                <button onclick="switchLang('es')">ES</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="hero-en">
+        <h1>Fast Same Day Flower Delivery Near Me</h1>
+        <p>Send flowers online today for birthdays, Mother's Day (May 10, 2026), weddings, funerals & more. Reliable local florists!</p>
+        <a href="https://www.floristone.com/index.cfm?source_id=aff&AffiliateID=2013017799" class="cta" onclick="gtag('event', 'click', {'event_category': 'affiliate', 'event_label': 'hero_en'})">Order Flowers Online Now</a> [web:2][web:7]
+    </section>
+
+    <!-- French Hero -->
+    <section class="hero lang-section" id="hero-fr" style="display:none;">
+        <h1>Livraison de Fleurs le Jour Même Près de Chez Moi</h1>
+        <p>Envoyez des fleurs en ligne dès aujourd'hui pour anniversaires, Fête des Mères, mariages, funérailles et plus. Fleuristes locaux fiables !</p>
+        <a href="https://www.floristone.com/index.cfm?source_id=aff&AffiliateID=2013017799" class="cta" onclick="gtag('event', 'click', {'event_category': 'affiliate', 'event_label': 'hero_fr'})">Commander des Fleurs en Ligne</a>
+    </section>
+
+    <!-- Spanish Hero -->
+    <section class="hero lang-section" id="hero-es" style="display:none;">
+        <h1>Entrega de Flores el Mismo Día Cerca de Mí</h1>
+        <p>Envía flores en línea hoy para cumpleaños, Día de la Madre, bodas, funerales y más. ¡Floristas locales confiables!</p>
+        <a href="https://www.floristone.com/index.cfm?source_id=aff&AffiliateID=2013017799" class="cta" onclick="gtag('event', 'click', {'event_category': 'affiliate', 'event_label': 'hero_es'})">Ordenar Flores en Línea Ahora</a>
+    </section>
+
+    <main>
+        <section id="benefits">
+            <h2>Benefits of Same Day Flower Delivery</h2>
+            <div class="tl-dr">TL;DR: Quick, fresh flowers delivered locally for any occasion – birthdays, anniversaries, sympathy.[web:3]</div>
+            <ul>
+                <li>Fresh arrangements from local florists near me.</li>
+                <li>Order flowers online 24/7 with same day delivery.</li>
+                <li>Affordable flower delivery for Mother's Day flowers, birthday flowers, wedding flowers, funeral flowers.</li>
+            </ul>
+            <a href="https://www.floristone.com/index.cfm?source_id=aff&AffiliateID=2013017799" class="cta">Send Flowers Now</a> [web:1][web:14]
+
+            <div class="lang-section">
+                <h3>En français</h3>
+                <p>Avantages de la livraison de fleurs le jour même : Fleurs fraîches de fleuristes locaux pour toutes occasions.</p>
+            </div>
+            <div class="lang-section">
+                <h3>En español</h3>
+                <p>Beneficios de entrega de flores el mismo día: Arreglos frescos de floristas locales para cualquier ocasión.</p>
+            </div>
+        </section>
+
+        <section id="comparison">
+            <h2>Flower Delivery Services Comparison</h2>
+            <table>
+                <thead>
+                    <tr><th>Service</th><th>Same Day</th><th>Price Range</th><th>US Coverage</th><th>CTA</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>FloristOne</td><td>Yes</td><td>$40-150</td><td>National</td><td><a href="https://www.floristone.com/index.cfm?source_id=aff&AffiliateID=2013017799">Order</a></td></tr>
+                    <tr><td>1-800-Flowers</td><td>Yes</td><td>$50-200</td><td>National</td><td>-</td></tr>
+                    <tr><td>FTD</td><td>Yes</td><td>$45-180</td><td>National</td><td>-</td></tr>
+                </tbody>
+            </table> [web:4][web:16][web:7]
+            <!-- FR/ES headers translated similarly -->
+        </section>
+
+        <section id="testimonials">
+            <h2>Customer Testimonials</h2>
+            <div class="testimonial">"The flowers were delivered timely and very beautiful!" - Sarah, PA [web:14]</div>
+            <div class="testimonial">"Great job handling my order even when I forgot to add my name." - John, US [web:14]</div>
+            <div class="testimonial">"100% satisfied with all deliveries." - Mike [web:20]</div> [web:20]
+
+            <details class="faq">
+                <summary>En français: Témoignages</summary>
+                <p>Les fleurs ont été livrées à temps et très belles !</p>
+            </details>
+        </section>
+
+        <section id="faqs">
+            <h2>Frequently Asked Questions</h2>
+            <details class="faq">
+                <summary>How soon can I get same day flower delivery?</summary>
+                <p>Orders before 2pm often qualify for same day delivery near me. [web:15]</p>
+            </details>
+            <details class="faq">
+                <summary>Do you deliver flowers for Mother's Day?</summary>
+                <p>Yes, popular for May 10, 2026 – roses, carnations, lilies. [web:5][web:17][web:22]</p>
+            </details>
+            <!-- 13 more similar FAQs with long-tail keywords like "flower delivery near me Philadelphia", "order flowers online cheap", etc. -->
+            <!-- Each with FR/ES in sub-details -->
+
+            <div class="lang-section">
+                <h3>Conseils du jour - 27 mars 2026</h3>
+                <p>Ajoutez une carte personnelle pour plus d'impact.</p>
+            </div>
+            <div class="lang-section">
+                <h3>Consejo del día - 27 marzo 2026</h3>
+                <p>Agrega una tarjeta personal para mayor impacto.</p>
+            </div>
+        </section>
+
+        <!-- Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [{
+                "@type": "Question",
+                "name": "How soon can I get same day flower delivery?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Orders before 2pm often qualify."}
+            }]
+        }
+        </script>
+        <!-- More schemas: Product, BreadcrumbList, etc. -->
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Flower Delivery Site. Partnered with <a href="https://www.floristone.com">FloristOne.com</a>. Langhorne, PA. Contact: info@example.com</p>
+        <p>Français: Site de livraison de fleurs. Español: Sitio de entrega de flores.</p>
+    </footer>
+
+    <!-- Exit Intent Popup (EN default) -->
+    <div id="exit-popup">
+        <div>
+            <h2>Wait! Order Flowers & Save</h2>
+            <a href="https://www.floristone.com/index.cfm?source_id=aff&AffiliateID=2013017799" class="cta">Send Flowers Now</a>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Language switch (show/hide sections or scroll)
+        function switchLang(lang) {
+            document.querySelectorAll('.lang-active').forEach(el => el.classList.remove('lang-active'));
+            event.target.classList.add('lang-active');
+            // Simple: scroll to lang section or toggle visibility
+            document.getElementById('hero-en').style.display = lang === 'en' ? 'block' : 'none';
+            // Similar for others, extend for all sections
+        }
+
+        // Exit intent
+        let shown = false;
+        document.addEventListener('mouseleave', e => {
+            if (e.clientY < 0 && !shown) {
+                document.getElementById('exit-popup').style.display = 'block';
+                shown = true;
+            }
+        });
+        function closePopup() { document.getElementById('exit-popup').style.display = 'none'; }
+
+        // Track clicks
+        document.querySelectorAll('a[href*="floristone.com"]').forEach(link => {
+            link.addEventListener('click', () => {
+                gtag('event', 'affiliate_click', { 'language': document.querySelector('.lang-active').textContent });
+            });
+        });
+
+        // Daily tip date
+        document.querySelectorAll('[id*="day"]').forEach(el => {
+            el.textContent = el.textContent.replace('2026', new Date().toLocaleDateString('en-US', {year: 'numeric'}));
+        });
+    </script>
+
+    <!-- robots.txt and sitemap as data urls or separate files recommended for production -->
+</body>
+</html>
