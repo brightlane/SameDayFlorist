@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Allow: /delivery/
+Allow: /blog/
+
+# Sitemap location for Bing, Google, and DuckDuckGo
+Sitemap: https://brightlane.github.io/SameDayFlorist/sitemap.xml
+
+# Prevent bots from crawling junk or temporary files
+Disallow: /node_modules/
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /vulture-gen.js
+Disallow: /sitemap-generator.js
+Disallow: /ping-engines.js
+Disallow: /social-distributor.js
+
+# Optimization for high-velocity sites
+Crawl-delay: 1
