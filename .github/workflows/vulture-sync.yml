@@ -1,0 +1,43 @@
+name: Vulture 10K Sync
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # This enables the manual "Run" button in GitHub Actions
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install Dependencies
+        run: npm install axios
+
+      - name: Run BrightLane Engine
+        run: |
+          node vulture-master.js
+          node sitemap-generator.js
+          node legal-gen.js
+          node ping-engines.js
+          node social-distributor.js
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "brightlane-vulture"
+          git config --global user.email "vulture@brightlane.dev"
+          git add .
+          
+          # Only commit if there are actually changes to avoid workflow errors
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "Vulture Matrix Update: $(date)"
+            git push
+          else
+            echo "No changes detected. Skipping push."
+          fi
