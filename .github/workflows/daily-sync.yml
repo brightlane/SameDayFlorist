@@ -1,0 +1,36 @@
+name: Daily SEO Refresh
+
+on:
+  schedule:
+    - cron: '0 13 * * *' # Automatically runs every day at 1:00 PM UTC
+  workflow_dispatch:      # Allows you to click "Run" manually whenever you want
+
+jobs:
+  refresh-network:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Run BrightLane Daily Stack
+        run: |
+          npm install axios
+          node daily-writer.js
+          node vulture-master.js
+          node sitemap-generator.js
+          node legal-gen.js
+          node ping-engines.js
+          node social-distributor.js
+
+      - name: Push to Branch
+        run: |
+          git config --global user.name "brightlane-vulture"
+          git config --global user.email "vulture@brightlane.dev"
+          git add .
+          git commit -m "Daily Content & Matrix Refresh: $(date +'%Y-%m-%d')" || echo "No changes"
+          git push
