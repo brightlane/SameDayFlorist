@@ -1,0 +1,22 @@
+[
+  {"city": "New York City", "state": "NY", "pop": "19.2M"},
+  {"city": "Los Angeles", "state": "CA", "pop": "12.7M"},
+  {"city": "Chicago", "state": "IL", "pop": "9.1M"},
+  {"city": "Houston", "state": "TX", "pop": "6.9M"},
+  {"city": "Dallas", "state": "TX", "pop": "6.8M"},
+  {"city": "Miami", "state": "FL", "pop": "6.4M"},
+  {"city": "Atlanta", "state": "GA", "pop": "6.3M"},
+  {"city": "Philadelphia", "state": "PA", "pop": "5.9M"},
+  {"city": "Washington DC", "state": "DC", "pop": "5.6M"},
+  {"city": "Phoenix", "state": "AZ", "pop": "4.8M"},
+  {"city": "Boston", "state": "MA", "pop": "4.4M"},
+  {"city": "Seattle", "state": "WA", "pop": "3.6M"},
+  {"city": "Detroit", "state": "MI", "pop": "3.5M"},
+  {"city": "San Diego", "state": "CA", "pop": "3.4M"},
+  {"city": "San Francisco", "state": "CA", "pop": "3.3M"},
+  {"city": "Tampa", "state": "FL", "pop": "3.0M"},
+  {"city": "Minneapolis", "state": "MN", "pop": "3.0M"},
+  {"city": "Las Vegas", "state": "NV", "pop": "3.0M"},
+  {"city": "Denver", "state": "CO", "pop": "3.0M"},
+  {"city": "San Antonio", "state": "TX", "pop": "2.5M"}
+]
