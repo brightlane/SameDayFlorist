@@ -1,35 +1,46 @@
-// Add this to your vulture-gen.js HTML template variable
-const html = `
+const fs = require('fs');
+const path = require('path');
+
+const AFFILIATE_ID = "2013017799";
+const SITE_URL = "https://brightlane.github.io/MothersDayFlowers/";
+
+// Load your 10,000 cities
+const cities = JSON.parse(fs.readFileSync('cities.json', 'utf8'));
+const outDir = path.resolve(__dirname, 'delivery');
+if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+
+cities.forEach(item => {
+    const slug = `${item.city.toLowerCase().replace(/ /g, '-')}-mothers-day-delivery.html`;
+    const filePath = path.join(outDir, slug);
+    
+    const html = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Same Day Flower Delivery in ${item.city}, ${item.state} | Fresh 2026 Blooms</title>
+    <title>Mother's Day Flower Delivery in ${item.city}, ${item.state} | Sunday May 10, 2026</title>
     <style>
-        .trust-bar { background: #f8f9fa; padding: 10px; display: flex; justify-content: space-around; font-size: 13px; color: #666; border-bottom: 1px solid #ddd; }
-        .hero { text-align: center; padding: 50px 20px; background: linear-gradient(to bottom, #fff, #fff5f5); }
-        .urgency { color: #e63946; font-weight: bold; margin-bottom: 20px; }
-        .cta-button { background: #e63946; color: white; padding: 20px 40px; font-size: 20px; text-decoration: none; border-radius: 5px; display: inline-block; box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3); }
+        body { font-family: 'Georgia', serif; line-height: 1.6; color: #443; margin: 0; background: #fffaf0; }
+        .header { background: #fce4ec; padding: 20px; text-align: center; border-bottom: 4px solid #f06292; }
+        .hero { max-width: 900px; margin: 40px auto; padding: 20px; text-align: center; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .sunday-badge { background: #f06292; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; display: inline-block; margin-bottom: 15px; }
+        .cta-btn { background: #880e4f; color: white; padding: 20px 40px; font-size: 22px; text-decoration: none; border-radius: 50px; display: inline-block; transition: 0.3s; }
+        .cta-btn:hover { background: #ad1457; transform: translateY(-3px); }
     </style>
 </head>
 <body>
-    <div class="trust-bar">
-        <span>✔ 7-Day Freshness Guarantee</span>
-        <span>✔ Local ${item.city} Florist Dispatch</span>
-        <span>✔ Secure 256-bit Checkout</span>
-    </div>
-
+    <div class="header"><h1>BrightLane Mothers: ${item.city} Edition</h1></div>
     <div class="hero">
-        <p class="urgency">🕒 Order within the next 2 hours for Same-Day Delivery in ${item.city}!</p>
-        <h1>Fresh Flowers Delivered Today in ${item.city}</h1>
-        <p>Direct from local artisans to your doorstep. No boxes. No transit delays.</p>
+        <div class="sunday-badge">SUNDAY MAY 10 DELIVERY AVAILABLE</div>
+        <h1>Celebrate Mom in ${item.city}</h1>
+        <p>Don't settle for "boxed" flowers. In ${item.city}, our local artisan network prepares hand-arranged bouquets delivered directly to her door this Sunday morning.</p>
         <br>
-        <a href="https://www.floristone.com/main.cfm?source_id=aff&AffiliateID=${AFFILIATE_ID}" class="cta-button">SHOP LOCAL FLOWERS NOW</a>
+        <a href="https://www.floristone.com/main.cfm?occ=md&source_id=aff&AffiliateID=${AFFILIATE_ID}" class="cta-btn">SEND MOM FLOWERS TODAY</a>
+        <p style="margin-top: 20px; font-size: 0.9rem;">Verified Local Delivery via FloristOne ID: ${AFFILIATE_ID}</p>
     </div>
-
-    <section style="max-width: 800px; margin: 0 auto; padding: 20px;">
-        <h2>Why Choose Our ${item.city} Network?</h2>
-        <p>Unlike national "order gatherers," the BrightLane network routes your request (ID: ${AFFILIATE_ID}) specifically to a brick-and-mortar florist in ${item.state}. This ensures your arrangement arrives hand-delivered and hydrated.</p>
-    </section>
 </body>
 </html>`;
+
+    fs.writeFileSync(filePath, html);
+});
+console.log("Mother's Day 10K Matrix Generated.");
