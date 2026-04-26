@@ -1,47 +1,45 @@
 const fs = require('fs');
 const path = require('path');
 
-// TARGET BASE URL FOR THIS REPO
 const BASE_URL = "https://brightlane.github.io/SameDayFlorist/";
 const deliveryDir = path.join(__dirname, 'delivery');
 
-// 1. Start the Sitemap Structure
-let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${BASE_URL}</loc>
-    <priority>1.0</priority>
-  </url>`;
-
-// 2. Add City Pages from the /delivery/ folder
-if (fs.existsSync(deliveryDir)) {
-    const files = fs.readdirSync(deliveryDir).filter(file => file.endsWith('.html'));
-    files.forEach(file => {
-        sitemap += `
-  <url>
-    <loc>${BASE_URL}delivery/${file}</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>`;
-    });
+if (!fs.existsSync(deliveryDir)) {
+    console.log("No delivery folder found. Run vulture-gen.js first.");
+    process.exit(1);
 }
 
-// 3. Add Blog Pages
-const blogDir = path.join(__dirname, 'blog');
-if (fs.existsSync(blogDir)) {
-    const blogFiles = fs.readdirSync(blogDir).filter(file => file.endsWith('.html'));
-    blogFiles.forEach(file => {
-        sitemap += `
-  <url>
-    <loc>${BASE_URL}blog/${file}</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>`;
+const files = fs.readdirSync(deliveryDir).filter(f => f.endsWith('.html'));
+
+// Group files by state (assuming slug format: city-state-delivery.html)
+const stateMap = {};
+files.forEach(file => {
+    const parts = file.split('-');
+    const state = parts[parts.length - 2]; // Grabs the 'ny' or 'ca' part
+    if (!stateMap[state]) stateMap[state] = [];
+    stateMap[state].push(file);
+});
+
+// 1. Generate Individual State Sitemaps
+const sitemapFiles = [];
+for (const state in stateMap) {
+    let xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+    stateMap[state].forEach(file => {
+        xml += `<url><loc>${BASE_URL}delivery/${file}</loc><priority>0.8</priority></url>`;
     });
+    xml += `</urlset>`;
+    
+    const filename = `sitemap-${state}.xml`;
+    fs.writeFileSync(path.join(__dirname, filename), xml);
+    sitemapFiles.push(filename);
 }
 
-sitemap += `\n</urlset>`;
+// 2. Generate the MASTER SITEMAP INDEX
+let indexXml = `<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+sitemapFiles.forEach(s => {
+    indexXml += `<sitemap><loc>${BASE_URL}${s}</loc></sitemap>`;
+});
+indexXml += `</sitemapindex>`;
 
-// 4. Save the file
-fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemap);
-console.log(`Sitemap for SameDayFlorist generated successfully.`);
+fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), indexXml);
+console.log(`Generated Sitemap Index and ${sitemapFiles.length} state sitemaps.`);
