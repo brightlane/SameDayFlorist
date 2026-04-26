@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | SameDayFlorist 2026</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fff5f5; color: #444; text-align: center; padding: 50px 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        h1 { color: #e63946; font-size: 48px; margin-bottom: 10px; }
+        p { font-size: 18px; line-height: 1.6; }
+        .btn { display: inline-block; background: #e63946; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 20px; transition: transform 0.2s; }
+        .btn:hover { transform: scale(1.05); }
+        .timer { font-weight: bold; color: #e63946; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Oops!</h1>
+        <p>It looks like that bouquet has already been picked.</p>
+        <p>Don't worry, we can still get fresh flowers delivered today.</p>
+        
+        <a href="https://www.floristone.com/main.cfm?source_id=aff&AffiliateID=2013017799" class="btn">VIEW TODAY'S SPECIALS</a>
+        
+        <p style="margin-top: 30px; font-size: 14px; color: #888;">
+            Redirecting to our Same-Day hub in <span id="count" class="timer">5</span> seconds...
+        </p>
+    </div>
+
+    <script>
+        let seconds = 5;
+        const display = document.getElementById('count');
+        const timer = setInterval(() => {
+            seconds--;
+            display.innerText = seconds;
+            if (seconds <= 0) {
+                clearInterval(timer);
+                window.location.href = "https://brightlane.github.io/SameDayFlorist/";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
