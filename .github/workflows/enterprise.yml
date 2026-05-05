@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -24,10 +26,16 @@ jobs:
       - name: Run 100K Blast
         run: npm run blast-100k
 
-      - name: Commit changes
+      - name: Commit changes safely
         run: |
           git config --global user.name "bot"
           git config --global user.email "bot@users.noreply.github.com"
+
           git add .
+
           git commit -m "Enterprise blast update" || echo "No changes"
-          git push
+
+          # 🔥 CRITICAL FIX: sync before push
+          git pull --rebase origin main || true
+
+          git push origin main
