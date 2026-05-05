@@ -1,20 +1,33 @@
 name: Enterprise 100K Blaster
+
 on:
-  schedule:
-    - cron: '0 2 * * *'  # 2AM daily batches
   workflow_dispatch:
-    inputs:
-      batchSize:
-        default: '5000'
+  schedule:
+    - cron: "0 2 * * *"
+
 jobs:
   blast:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with: { node-version: 20 }
-    - run: npm ci
-    - run: npm run blast-${{ github.event.inputs.batchSize || 5000 }}
-    - run: git add enterprise-pages-* sitemap-*.xml
-    - run: git commit -m "Enterprise batch ${{ github.event.inputs.batchSize || 5000 }} $(date)" || exit 0
-    - run: git push
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Blast Engine
+        run: npm run blast-100k
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "bot"
+          git config --global user.email "bot@users.noreply.github.com"
+          git add .
+          git commit -m "Enterprise blast update" || echo "No changes"
+          git push
