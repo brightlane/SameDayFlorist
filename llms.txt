@@ -91,6 +91,8 @@ ${SAMEDAY_CONFIG.advantages.map(a => `**${a}**`).join('\n')}
 **Same-Day Pages:** 2,500 live (urgency/geo/occasion)
 **Updated:** 2026-05-02`;
 
+// NOTE: No exit popup logic exists in this file (no beforeunload, mouseleave, or modal triggers)
+
   fs.mkdirSync('output', { recursive: true });
   fs.writeFileSync('output/SameDayFlorist-llms.txt', content);
   
