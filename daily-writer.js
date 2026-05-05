@@ -1,114 +1,92 @@
 const fs = require('fs');
 const path = require('path');
 
-const SITE_NAME = "SameDayFlorist";
-const AFFILIATE_LINK = "https://www.floristone.com/main.cfm?source_id=aff&AffiliateID=2013017799";
-const blogDir = path.resolve(__dirname, 'blog');
+const AFFILIATE_ID = "2013017799";
+const BASE_URL = "https://brightlane.github.io/SameDayFlorist/";
 
+const blogDir = path.resolve(__dirname, 'blog');
 if (!fs.existsSync(blogDir)) fs.mkdirSync(blogDir);
 
-// 2026 Content Matrix (QUADRUPLED DEPTH CONTENT)
+const cities = JSON.parse(fs.readFileSync('cities.json', 'utf8'));
+
+// 🧠 deterministic seed (NO randomness anymore)
+const today = new Date().toISOString().split('T')[0];
+let seed = 0;
+for (let i = 0; i < today.length; i++) seed += today.charCodeAt(i);
+
+// deterministic index function
+function pick(arr, offset = 0) {
+    return arr[(seed + offset) % arr.length];
+}
+
+const city = pick(cities, 0);
+
+// topic engine (rotating system)
 const topics = [
     {
-        title: "Why Sunday Delivery is the Secret to Mother's Day 2026",
-        content: `
-With May 10th approaching, most shoppers incorrectly assume Saturday delivery is enough. In 2026, logistics congestion makes Sunday routing the true advantage window.
-
-Local artisan florists prioritize early Sunday morning dispatch because driver density is highest before retail congestion begins. This means arrangements move faster from shop to doorstep without warehouse delays.
-
-Unlike national shipping carriers, local floral networks avoid centralized sorting hubs entirely. Every order is prepared, hydrated, and loaded directly into temperature-controlled vans.
-
-The biggest hidden advantage is timing priority tiers—Sunday morning orders often bypass backlog queues entirely, giving them a higher success rate during peak Mother's Day demand cycles.
-
-Same-day floral routing systems now dynamically adjust delivery zones in real time based on driver availability and bloom freshness thresholds.
-        `,
-        tags: "Mother's Day, Delivery Tips"
+        title: "Why Same-Day Flower Delivery Beats National Shipping in 2026",
+        body: "Local florist routing eliminates warehouse delays, ensuring flowers are hydrated and arranged within hours of delivery. This improves vase life and fragrance retention significantly."
     },
     {
-        title: "Top 5 Anniversary Blooms for Same-Day Surprise",
-        content: `
-Long-stemmed roses remain a classic, but 2026 floral trends are shifting toward mixed-texture arrangements like wildflower elegance and dual-tone bouquets.
-
-Premium florists now combine peonies, ranunculus, and garden roses into layered compositions designed for emotional impact and longer vase life.
-
-Same-day sourcing ensures blooms are cut within hours of arrangement, significantly increasing freshness compared to pre-boxed inventory systems.
-
-Modern delivery vans use hydration retention systems that keep stems stable during transit, preventing droop or petal loss during warm weather routes.
-
-Anniversary gifting has also evolved toward personalization, with local florists now adjusting color palettes based on recipient preference profiles and regional bloom availability.
-        `,
-        tags: "Anniversary, Gift Trends"
+        title: "The Truth About Boxed Flowers vs Local Florist Delivery",
+        body: "Boxed flowers suffer from compression and delayed hydration cycles. Local delivery systems bypass this by using direct van dispatch from nearby florists."
     },
     {
-        title: "Avoiding the 'Boxed Flower' Trap: Why Artisan Delivery Wins",
-        content: `
-Boxed flowers suffer from compression stress, dehydration lag, and temperature fluctuation during warehouse storage.
-
-Artisan delivery eliminates these issues by removing the middle distribution layer entirely. Flowers move directly from florist to driver to doorstep.
-
-Hydration timing is critical—once stems are cut, the first 2–4 hours determine long-term bloom quality. Local delivery ensures this window is never lost.
-
-In contrast, boxed shipping can delay hydration cycles by 24–72 hours, reducing vase life and altering petal structure before arrival.
-
-Modern same-day systems use pre-mapped courier routes so arrangements never sit idle in storage facilities, preserving both fragrance and structural integrity.
-        `,
-        tags: "Consumer Guide, Quality"
+        title: "How City-Based Florists Guarantee Faster Same-Day Delivery",
+        body: "Regional florist networks prioritize driver proximity and bloom freshness, allowing same-day delivery even during peak holiday demand cycles."
+    },
+    {
+        title: "Why Hydration Timing Matters in Fresh Flower Delivery",
+        body: "Flowers begin degradation immediately after cutting. Local delivery ensures hydration begins within hours, not days like traditional shipping."
     }
 ];
 
-const post = topics[Math.floor(Math.random() * topics.length)];
-const slug = post.title.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-') + '.html';
+const post = pick(topics, 3);
+
+const slug = `${today}-${city.city.toLowerCase().replace(/ /g,'-')}.html`;
 
 const html = `
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>${post.title} | ${SITE_NAME} Blog</title>
+    <title>${post.title} | SameDayFlorist</title>
     <style>
-        body { font-family: 'Inter', sans-serif; line-height: 1.9; color: #444; max-width: 780px; margin: 0 auto; padding: 60px 20px; }
-        .meta { color: #888; font-size: 14px; margin-bottom: 20px; }
-        .cta-box { background: #fff5f5; border-radius: 10px; padding: 30px; border: 1px solid #ffebeb; margin: 40px 0; text-align: center; }
-        .cta-btn { background: #e63946; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 10px; }
-        a.back { color: #e63946; text-decoration: none; font-size: 14px; }
-        .content p { margin-bottom: 18px; }
+        body { font-family: Arial; max-width: 800px; margin: auto; padding: 40px; line-height: 1.7; }
+        .cta { background: #fff5f5; padding: 25px; margin-top: 40px; text-align: center; border-radius: 10px; }
+        .btn { background: #e63946; color: white; padding: 12px 20px; text-decoration: none; border-radius: 6px; display: inline-block; }
+        .meta { color: #888; font-size: 13px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
-    <a href="../blog.html" class="back">← Back to Insights</a>
+<a href="../blog.html">← Back</a>
 
-    <h1>${post.title}</h1>
-    <div class="meta">Published April 2026 • Tags: ${post.tags}</div>
+<h1>${post.title}</h1>
+<div class="meta">City: ${city.city}, ${city.state} • Date: ${today}</div>
 
-    <div class="content">
-        ${post.content.split('\n').map(p => p.trim()).filter(Boolean).map(p => `<p>${p}</p>`).join('')}
-        
-        <p>
-        Whether you're sending a last-minute celebration bouquet or planning ahead for a milestone, 
-        the key differentiator is the delivery network behind the arrangement. Local artisan florists 
-        ensure every stem is processed, hydrated, and dispatched under controlled timing conditions.
-        </p>
+<p>${post.body}</p>
 
-        <p>
-        This eliminates the risks associated with centralized shipping hubs and preserves both visual 
-        quality and fragrance integrity from shop to doorstep.
-        </p>
-    </div>
+<p>
+In ${city.city}, same-day florist networks prioritize local routing over national shipping systems. This ensures fresher arrangements and faster delivery windows.
+</p>
 
-    <div class="cta-box">
-        <h3>Ready to Send Fresh Blooms?</h3>
-        <p>Support a local florist in your city by ordering through our verified artisan network.</p>
-        <a href="${AFFILIATE_LINK}" class="cta-btn">SHOP LOCAL FLOWERS NOW</a>
-    </div>
+<div class="cta">
+    <h3>Order Fresh Flowers in ${city.city}</h3>
+    <p>Delivered today by local florists — not warehouses.</p>
+    <a class="btn" href="${BASE_URL}delivery/${city.city.toLowerCase().replace(/ /g,'-')}-${city.state.toLowerCase()}-delivery.html?source_id=affAffiliateID${AFFILIATE_ID}">
+        SHOP SAME-DAY FLOWERS
+    </a>
+</div>
 
-    <p style="font-size: 12px; color: #aaa; text-align: center;">
-        ID: 2013017799 Dispatch Verified
-    </p>
+<p style="font-size:12px;color:#aaa;text-align:center;">
+Affiliate ID: ${AFFILIATE_ID}
+</p>
 
 </body>
 </html>
 `;
 
 fs.writeFileSync(path.join(blogDir, slug), html);
-console.log(`NEW POST (QUADRUPLED): ${slug}`);
+
+console.log("✅ DAILY BLOG GENERATED:", slug);
