@@ -1,0 +1,20 @@
+name: Enterprise 100K Blaster
+on:
+  schedule:
+    - cron: '0 2 * * *'  # 2AM daily batches
+  workflow_dispatch:
+    inputs:
+      batchSize:
+        default: '5000'
+jobs:
+  blast:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with: { node-version: 20 }
+    - run: npm ci
+    - run: npm run blast-${{ github.event.inputs.batchSize || 5000 }}
+    - run: git add enterprise-pages-* sitemap-*.xml
+    - run: git commit -m "Enterprise batch ${{ github.event.inputs.batchSize || 5000 }} $(date)" || exit 0
+    - run: git push
